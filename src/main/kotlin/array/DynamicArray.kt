@@ -13,15 +13,15 @@ class DynamicArray (initialCapacity: Int = 1) {
         if (index < 0 || index >= count) {
             throw IllegalArgumentException()
         }
-        for (i in index..< count - 1) {
+        for (i in index until count - 1) {
             items[i] = items[i + 1]
         }
-
+        items[count - 1] = 0
         count--
     }
 
     fun indexOf(item: Int): Int {
-        for (i in 0..< count) {
+        for (i in 0 until count) {
             if (item == items[i]) {
                 return i
             }
@@ -39,7 +39,7 @@ class DynamicArray (initialCapacity: Int = 1) {
     }
 
     fun reverse() {
-        for (i in 0..< count / 2) {
+        for (i in 0 until count / 2) {
             val tmp = items[i]
             items[i] = items[count - 1 - i]
             items[count - 1 - i] = tmp
@@ -47,12 +47,18 @@ class DynamicArray (initialCapacity: Int = 1) {
     }
 
     fun max(): Int {
+        if (count == 0) {
+            throw IllegalStateException("Array is empty")
+        }
+
         var max = items[0]
-        for (item in items) {
-            if (item > max) {
-                max = item
+
+        for (i in 1 until count) {
+            if (items[i] > max) {
+                max = items[i]
             }
         }
+
         return max
     }
 
@@ -71,8 +77,29 @@ class DynamicArray (initialCapacity: Int = 1) {
         count++
     }
 
+    fun intersect(other: DynamicArray): DynamicArray {
+        val smaller = if (this.count > other.count) other else this
+        val larger = if (this.count <= other.count) this else other
+
+        if (other.count == 0) {
+            return DynamicArray(1)
+        }
+
+        val intersection = DynamicArray(smaller.count)
+
+        for (i in 0 until smaller.count) {
+            val item = smaller.getAt(i)
+
+            if (larger.indexOf(item) > -1 && intersection.indexOf(item) == -1) {
+                intersection.insert(item)
+            }
+        }
+
+        return intersection
+    }
+
     fun printItems() {
-        for (i in 0..<count) {
+        for (i in 0 until count) {
             println(items[i])
         }
     }
