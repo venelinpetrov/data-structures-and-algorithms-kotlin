@@ -7,10 +7,6 @@ class LinkedList {
 
     private class Node(val value: Int) {
         var next: Node? = null
-        override fun toString(): String {
-            return "Node(value=$value, next=$next)"
-        }
-
     }
 
     fun addLast(value: Int) {
@@ -78,12 +74,12 @@ class LinkedList {
         size--
     }
 
-    fun contains(value: Int): Boolean {
+    operator fun contains(value: Int): Boolean {
         if (isEmpty()) {
             return false
         }
         var current = first
-        while (current?.next != null) {
+        while (current != null) {
             if (current.value == value) {
                 return true
             }
@@ -92,11 +88,16 @@ class LinkedList {
         return false
     }
 
-    fun isEmpty(): Boolean {
-        return first == null
-    }
+    fun isEmpty(): Boolean = first == null
 
     override fun toString(): String {
-        return "LinkedList(first=$first, last=$last)"
+        val values = buildList {
+            var current = first
+            while (current != null) {
+                add(current.value)
+                current = current.next
+            }
+        }
+        return values.joinToString(prefix = "[", postfix = "]")
     }
 }
