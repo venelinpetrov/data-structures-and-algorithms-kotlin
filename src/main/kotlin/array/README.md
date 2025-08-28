@@ -38,4 +38,4 @@ This project contains a custom implementation of a **dynamic array** in Kotlin. 
 
 ## Example Usage
 
-See `Playground.ipynb`
+See `array/Playground.ipynb`
