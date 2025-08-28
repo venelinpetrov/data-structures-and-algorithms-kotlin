@@ -5,11 +5,12 @@ class LinkedList {
     private var last: Node? = null
     private var size: Int = 0
 
-    private class Node(private val value: Int) {
+    private class Node(val value: Int) {
         var next: Node? = null
         override fun toString(): String {
             return "Node(value=$value, next=$next)"
         }
+
     }
 
     fun addLast(value: Int) {
@@ -26,16 +27,69 @@ class LinkedList {
     }
 
     fun addFirst(value: Int) {
-        var node = Node(value)
+        val node = Node(value)
 
         if (isEmpty()) {
             first = node
             last = node
         } else {
-            node?.next = first
+            node.next = first
             first = node
         }
         size++
+    }
+
+    fun deleteFirst() {
+        if (isEmpty()) {
+            return
+        }
+
+        if (first == last) {
+            first = null
+            last = null
+        } else {
+            val second = first?.next
+            first?.next = null
+            first = second
+        }
+
+        size--
+    }
+
+    fun deleteLast() {
+        if (isEmpty()) {
+            return
+        }
+        // 10 -> 20 -> 30 -> 40
+        //                   ^ last
+        if (first == last) {
+            first = null
+            last = null
+        } else {
+            var current = first
+            while (current?.next != last) {
+                current = current?.next
+            }
+
+            current?.next = null
+            last = current
+        }
+
+        size--
+    }
+
+    fun contains(value: Int): Boolean {
+        if (isEmpty()) {
+            return false
+        }
+        var current = first
+        while (current?.next != null) {
+            if (current.value == value) {
+                return true
+            }
+            current = current.next
+        }
+        return false
     }
 
     fun isEmpty(): Boolean {
