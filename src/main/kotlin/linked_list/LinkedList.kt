@@ -87,6 +87,26 @@ class LinkedList {
         }
         return false
     }
+    
+    fun reverse() {
+        if (isEmpty()) {
+            return;
+        }
+
+        var prev = first
+        var current = first?.next
+
+        while (current != null) {
+            val next = current.next
+            current.next = prev
+            prev = current
+            current = next
+        }
+
+        last = first
+        last?.next = null
+        first = prev
+    }
 
     fun isEmpty(): Boolean = first == null
 
