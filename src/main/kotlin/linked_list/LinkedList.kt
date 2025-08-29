@@ -108,6 +108,24 @@ class LinkedList {
         first = prev
     }
 
+    fun getKthNodeFromTheEnd(k: Int): Int {
+        // 10 -> 20 -> 30 -> 40
+        // value: 1 -> 30; 2 -> 20
+
+        var a = first
+        var b = first
+        var i = 0
+        while (b != last) {
+            b = b?.next
+            if (i >= k) {
+                a = a?.next
+            }
+            i++
+        }
+
+        return a!!.value
+    }
+
     fun isEmpty(): Boolean = first == null
 
     override fun toString(): String {
