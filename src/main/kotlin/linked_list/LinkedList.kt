@@ -126,6 +126,27 @@ class LinkedList {
         return a!!.value
     }
 
+    fun printMiddle() {
+        if (isEmpty()) {
+            return;
+        }
+        var current = first
+        var middle = first
+        var count = 1
+        while (current?.next != null) {
+            current = current.next
+            if ((count % 2) == 0) {
+                middle = middle?.next
+            }
+            count++
+        }
+
+        println(middle?.value)
+        if (count % 2 == 0) {
+            println(middle?.next?.value)
+        }
+    }
+
     fun isEmpty(): Boolean = first == null
 
     override fun toString(): String {
