@@ -5,8 +5,8 @@ Personal repository for learning and practicing Data Structures and Algorithms.
 ## What's Included
 
 - [Big-O notation](big-o-notation/)
-- [Arrays](array/)
-- [Linked lists](linked_list/)
+- [Array](src/main/kotlin/array/)
+- [Linked list](src/main/kotlin/linked_list/)
 - (todo) [Stack](stack/)
 - (todo) [Queue](queue/)
 - (todo) [Hash table](hash-table)
